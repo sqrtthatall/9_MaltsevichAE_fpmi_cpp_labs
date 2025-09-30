@@ -66,7 +66,7 @@ int main()
 
         std::random_device rd;
         std::mt19937 gen(rd());
-        std::uniform_real_distribution<float> dist(a, b);
+        std::uniform_real_distribution<int> dist(a, b);
         for (int j = 0; j < i; j++) {
             arr[j] = static_cast<int>(dist(gen));
         }
@@ -129,3 +129,4 @@ int main()
     return 0;
 
 }
+
