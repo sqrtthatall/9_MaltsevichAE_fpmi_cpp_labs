@@ -48,6 +48,7 @@ int main()
     }
     else if (choice == 2) {
         int i;
+        n = i; 
         std::cout << "Введите границы интервала [a, b]:\n";
         std::cout << "a = ";
         std::cin >> a;
@@ -126,4 +127,5 @@ int main()
 
     delete[] arr;
     return 0;
+
 }
