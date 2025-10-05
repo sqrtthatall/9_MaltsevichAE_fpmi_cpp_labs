@@ -105,7 +105,7 @@ int main() {
         std::cin >> b;
         if (a > b) {
             std::cout << "Ошибка: a должно быть <= b!\n";
-            return 1;
+            exit(1);
         }
         i = fillArrayRandomly(array, a, b);
     }
@@ -116,7 +116,7 @@ int main() {
 
     if (i == 0) {
         std::cout << "Массив пуст!" << std::endl;
-        return 0;
+        exit(3);
     }
 
     int min_index = findMinIndex(array, i);
@@ -128,3 +128,4 @@ int main() {
 }
 
  
+
