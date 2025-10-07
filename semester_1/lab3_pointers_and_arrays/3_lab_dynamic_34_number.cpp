@@ -1,81 +1,78 @@
-﻿#include <iostream>
+#include <iostream>
 #include <random>
+#include <clocale>
 
-int const size = 99;
+const int MAX_SIZE = 99;
 
-// Функция проверки, является ли подмассив палиндромом
-bool isPalindrome(int* arr, int start, int end) {
+//Функция проверки является ли подмассив палиндромом
+bool isPalindrome(const int* arr, int start, int end) {
     while (start < end) {
         if (arr[start] != arr[end]) {
             return false;
         }
-        start++;
-        end--;
+        ++start;
+        --end;
     }
     return true;
 }
 
-int main()
-{
-    setlocale(LC_ALL, "Russian");
+// Заполнение массива вручную
+int fillManually(int* arr, int maxSize) {
+    std::cout << "Вы выбрали непростой путь...\n";
+    std::cout << "Далее вводите число -> Enter. Для остановки введите 0 (ноль)\n";
 
-    int* arr = new int[size];
-    int choice;
+    int count = 0;
+    while (count < maxSize) {
+        float input;
+        std::cout << "Введите число для " << (count + 1) << "-го элемента массива: ";
+        std::cin >> input;
+
+        if (input == 0) {
+            break;
+        }
+        arr[count] = static_cast<int>(input);
+        ++count;
+    }
+    return count;
+}
+
+// Заполнение массива случайными числами от а до б
+int fillRandomly(int* arr, int maxSize) {
     float a, b;
-    std::cout << "Для заполнения массива есть два варианта" << std::endl;
-    std::cout << "1. Вручную" << std::endl;
-    std::cout << "2. При помощи рандомных чисел с указанием отрезка [a;b] где a < b" << std::endl;
-    std::cin >> choice;
+    std::cout << "Введите границы интервала [a, b]:\n";
+    std::cout << "a = ";
+    std::cin >> a;
+    std::cout << "b = ";
+    std::cin >> b;
 
-    int n = 0;
-
-    if (choice == 1) {
-        std::cout << "Вы выбрали непростой путь..." << std::endl;
-        std::cout << "Далее вводите число -> Enter. Для остановки введите 0 (ноль)" << std::endl;
-
-        while (n < size) {
-            float input;
-            std::cout << "Введите число для " << (n + 1) << "-го элемента массива: ";
-            std::cin >> input;
-
-            if (input == 0) {
-                break;
-            }
-            arr[n] = static_cast<int>(input);
-            n++;
-        }
-
+    if (a > b) {
+        std::cout << "Ошибка: a должно быть <= b!\n";
+        return -1; // ошибка
     }
-    else if (choice == 2) {
-        int i;
-        n = i; 
-        std::cout << "Введите границы интервала [a, b]:\n";
-        std::cout << "a = ";
-        std::cin >> a;
-        std::cout << "b = ";
-        std::cin >> b;
-        if (a > b) {
-            std::cout << "Ошибка: a должно быть <= b!\n";
-            delete[] arr;
-            return 1;
-        }
-        std::cout << "Введите количество элементов (не более " << size << "): ";
-        std::cin >> i;
-        if (i > size) i = size;
-        if (i < 0) i = 0;
 
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_real_distribution<int> dist(a, b);
-        for (int j = 0; j < i; j++) {
-            arr[j] = static_cast<int>(dist(gen));
-        }
+    int count;
+    std::cout << "Введите количество элементов (не более " << maxSize << "): ";
+    std::cin >> count;
 
+    if (count < 0) count = 0;
+    if (count > maxSize) count = maxSize;
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dist(static_cast<int>(a), static_cast<int>(b));
+
+    for (int i = 0; i < count; ++i) {
+        arr[i] = dist(gen);
     }
-    else {
-        std::cout << "Введите 1 либо 2 :)" << std::endl;
-        delete[] arr;
-        return 1;
+
+    return count;
+}
+
+// Находим самый длинный палиндромный подмассив и выводит его
+void findAndPrintLongestPalindrome(const int* arr, int n) {
+    if (n == 0) {
+        std::cout << "Массив пуст.\n";
+        return;
     }
 
     int maxLen = 0;
@@ -94,18 +91,19 @@ int main()
     }
 
     if (maxLen == 0) {
-        std::cout << "В массиве нет палиндромов длиной >= 1." << std::endl;
-    }
-    else {
+        std::cout << "В массиве нет палиндромов длиной >= 1.\n";
+    } else {
         std::cout << "Самый длинный палиндром: ";
         for (int i = maxStart; i < maxStart + maxLen; ++i) {
             std::cout << arr[i] << " ";
         }
-        std::cout << std::endl;
+        std::cout << "\n";
     }
+}
 
+// Вычисляем сумму элементов до последнего положительного
+void printSumBeforeLastPositive(const int* arr, int n) {
     int lastPositiveIndex = -1;
-
     for (int i = 0; i < n; ++i) {
         if (arr[i] > 0) {
             lastPositiveIndex = i;
@@ -113,20 +111,47 @@ int main()
     }
 
     if (lastPositiveIndex == -1) {
-        std::cout << "В массиве нет положительных элементов." << std::endl;
-        std::cout << "Сумма до последнего положительного: 0" << std::endl;
-    }
-    else {
-        int sum = 0;
+        std::cout << "В массиве нет положительных элементов.\n";
+        std::cout << "Сумма до последнего положительного: 0\n";
+    } else {
+        long long sum = 0; 
         for (int i = 0; i < lastPositiveIndex; ++i) {
             sum += arr[i];
         }
-
-        std::cout << "Сумма элементов до последнего положительного: " << sum << std::endl;
+        std::cout << "Сумма элементов до последнего положительного: " << sum << "\n";
     }
+}
+
+int main() {
+    std::setlocale(LC_ALL, "Russian");
+
+    int* arr = new int[MAX_SIZE];
+    int n = 0;
+
+    std::cout << "Для заполнения массива есть два варианта:\n";
+    std::cout << "1. Вручную\n";
+    std::cout << "2. Случайными числами из отрезка [a; b] (a <= b)\n";
+    int choice;
+    std::cin >> choice;
+
+    if (choice == 1) {
+        n = fillManually(arr, MAX_SIZE);
+    } else if (choice == 2) {
+        n = fillRandomly(arr, MAX_SIZE);
+        if (n == -1) {
+            delete[] arr;
+            return 1;
+        }
+    } else {
+        std::cout << "Неверный выбор. Введите 1 или 2.\n";
+        delete[] arr;
+        return 1;
+    }
+
+    // Вывод результатов
+    findAndPrintLongestPalindrome(arr, n);
+    printSumBeforeLastPositive(arr, n);
 
     delete[] arr;
     return 0;
-
 }
-
