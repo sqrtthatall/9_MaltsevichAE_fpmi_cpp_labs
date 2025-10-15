@@ -1,0 +1,64 @@
+#include <iostream>
+
+int** localeMatrix(int& len)
+{
+	int** matrix = new int* [len];
+	for (int i = 0; i < len; ++i)
+		matrix[i] = new int[len];
+	return matrix;
+}
+
+int** DeletMatrix(int** matrix, int& len)
+{
+	for (int i = 0; i < len; ++i)
+		delete[] matrix[i];
+	delete[] matrix;
+	return 0;
+}
+
+
+int** FillMatrix(int** matrix, int& len)
+{
+	for (int i = 0; i < len; i++) {
+		for (int j = 0; j < len; j++) {
+			std::cout << "Введите [" << i + 1 << "][" << j + 1 << "] элемент матрицы: ";
+			std::cin >> matrix[i][j];
+		}
+		
+	}
+	return matrix;
+}
+
+int** PrintMatrix(int** matrix, int& len)
+{
+	for (int i = 0; i < len; i++) {
+		for (int j = 0; j < len; j++) {
+			std::cout << " " << matrix[i][j];
+		}
+		std::cout << "\n";
+	}
+	return matrix;
+
+}
+
+int findNullInCol(int** matrix, int& len)
+{
+		for (int j = 0; j < len; j++) {
+
+		}
+}
+
+int main()
+{
+	int len;
+	setlocale(LC_ALL, "Russian");
+	std::cout << "Введите размерность квадратной матрицы: ";
+	std::cin >> len;
+	
+	int** matrix = localeMatrix(len);
+
+	FillMatrix(matrix, len);
+	PrintMatrix(matrix, len);
+	DeletMatrix(matrix, len);
+	return 0;
+}
