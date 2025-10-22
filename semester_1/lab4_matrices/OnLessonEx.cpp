@@ -1,19 +1,18 @@
 #include <iostream>
 #include <random>
 
-void Excepts()
+void Create_Matrix(int**& matrix, int m, int n)
 {
 	if (n < 0 && m < 0) throw "InvalidValueInMatrix\n";
 
-}
-
-
-void Create_Matrix(int**& matrix, int m, int n)
-{
-	matrix = new int* [m];
-	for (int i = 0; i < m; i++) {
-	matrix[i] = new int[n];
+	else {
+		matrix = new int* [m];
+		for (int i = 0; i < m; i++) 
+			{
+			matrix[i] = new int[n];
+			}
 	}
+	
 }
 
 void DeletMatrix(int** matrix, int n)
@@ -36,7 +35,7 @@ void FillMatrix(int** matrix, int n, int m)
 	}
 }
 
-void FillMatrixRandom(int** matrix, int n, int m, int a, int b)
+void FillMatrixRandomAtoB(int** matrix, int n, int m, int a, int b)
 {
 	std::random_device rd;
 	std::mt19937 gen(rd());
@@ -142,7 +141,7 @@ int main()
 			std::cout << "Введите число b: ";
 			std::cin >> b;
 
-			FillMatrixRandom(matrix, n, m, a, b);
+			FillMatrixRandomAtoB(matrix, n, m, a, b);
 		}
 		else
 		{
