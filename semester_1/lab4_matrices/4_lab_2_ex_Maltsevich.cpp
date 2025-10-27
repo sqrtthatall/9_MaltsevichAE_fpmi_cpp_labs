@@ -18,19 +18,15 @@ void DeletMatrix(int** matrix, int& len)
 }
 
 
-int** FillMatrix(int** matrix, int& len)
+void FillMatrix(int** matrix, int& len)
 {
 	for (int i = 0; i < len; i++) {
 		for (int j = 0; j < len; j++) {
 			std::cout << "Введите [" << i + 1 << "][" << j + 1 << "] элемент матрицы: ";
-			if (!std::cin >> matrix[i][j]) return 0;
-			else {
-				std::cin >> matrix[i][j];
-			}
+			std::cin >> matrix[i][j];
 		}
 
 	}
-	return matrix;
 }
 
 void FillMatrixRandom(int** matrix, int& len, int a, int b)
@@ -148,7 +144,7 @@ int main()
 	bool input_successful = false;
 	if (choice == 1)
 	{
-		input_successful = FillMatrix(matrix, len);
+		FillMatrix(matrix, len);
 	}
 	else if (choice == 2)
 	{
@@ -175,12 +171,6 @@ int main()
 		return 1;
 	}
 
-	if (!input_successful)
-	{
-		std::cout << "Ошибка при вводе данных!!!\n";
-		DeletMatrix(matrix, len);
-		return 1;
-	}
 
 	PrintMatrix(matrix, len);
 
