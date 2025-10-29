@@ -46,7 +46,7 @@ int fillRandomly(int* arr, int maxSize) {
 
     if (a > b) {
         std::cout << "Ошибка: a должно быть <= b!\n";
-        return -1; // ошибка
+        return -1;
     }
 
     int count;
@@ -154,6 +154,7 @@ int main() {
     delete[] arr;
     return 0;
 }
+
 
 
 
