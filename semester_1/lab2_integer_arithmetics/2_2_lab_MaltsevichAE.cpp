@@ -5,7 +5,7 @@ int main()
     int number;
     std::cout << "Input number: ";
     if(!(std::cin >> number)){
-        std::cout << "Введите число"
+        std::cout << "Введите число";
             }
     else{
     int original = number;
@@ -59,3 +59,4 @@ int main()
     return 0;
     }
 }
+
