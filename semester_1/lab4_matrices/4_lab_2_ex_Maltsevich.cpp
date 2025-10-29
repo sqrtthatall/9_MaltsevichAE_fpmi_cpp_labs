@@ -45,7 +45,7 @@ void FillMatrixRandom(int** matrix, int& len, int a, int b)
 	}
 }
 
-int** PrintMatrix(int** matrix, int& len)
+void PrintMatrix(int** matrix, int& len)
 {
 	for (int i = 0; i < len; i++) {
 		for (int j = 0; j < len; j++) {
@@ -53,7 +53,6 @@ int** PrintMatrix(int** matrix, int& len)
 		}
 		std::cout << "\n";
 	}
-	return matrix;
 
 }
 
