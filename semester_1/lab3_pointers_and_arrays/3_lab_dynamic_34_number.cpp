@@ -147,12 +147,13 @@ int main() {
         return 1;
     }
 
-    // Вывод результатов
+
     findAndPrintLongestPalindrome(arr, n);
     printSumBeforeLastPositive(arr, n);
 
     delete[] arr;
     return 0;
 }
+
 
 
