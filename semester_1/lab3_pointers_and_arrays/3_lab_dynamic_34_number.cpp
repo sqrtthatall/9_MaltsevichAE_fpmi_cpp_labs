@@ -1,6 +1,5 @@
 #include <iostream>
 #include <random>
-#include <clocale>
 
 const int MAX_SIZE = 99;
 
@@ -155,3 +154,4 @@ int main() {
     delete[] arr;
     return 0;
 }
+
