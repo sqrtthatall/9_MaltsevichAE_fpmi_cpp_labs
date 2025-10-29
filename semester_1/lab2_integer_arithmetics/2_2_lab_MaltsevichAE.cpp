@@ -4,8 +4,10 @@ int main()
 {
     int number;
     std::cout << "Input number: ";
-    std::cin >> number;
-
+    if(!(std::cin >> number)){
+        std::cout << "Введите число"
+            }
+    else{
     int original = number;
 
     for (int digit = 0; digit < 10; ++digit) {
@@ -55,4 +57,5 @@ int main()
     std::cout << "Result: " << result << std::endl;
 
     return 0;
+    }
 }
