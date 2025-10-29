@@ -122,7 +122,7 @@ void printSumBeforeLastPositive(const int* arr, int n) {
 }
 
 int main() {
-    std::setlocale(LC_ALL, "Russian");
+    setlocale(LC_ALL, "Russian");
 
     int* arr = new int[MAX_SIZE];
     int n = 0;
@@ -154,4 +154,5 @@ int main() {
     delete[] arr;
     return 0;
 }
+
 
