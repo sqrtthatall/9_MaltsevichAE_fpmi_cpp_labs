@@ -105,6 +105,7 @@ int main()
     }
 
     PrintArray(array, size);
+    std::cout << std::endl;
     int minIndex = FindMinIndex(array, size);
     long double product = ComputePositiveProduct(array, size);
     float sumBeforeMin = SumForFirstMinIndex(array, size, minIndex);
