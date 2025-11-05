@@ -71,7 +71,7 @@ int fillRandomly(int* arr, int maxSize) {
 void findAndPrintLongestPalindrome(const int* arr, int n) {
     if (n == 0) {
         std::cout << "Массив пуст.\n";
-        return;
+        return 0;
     }
 
     int maxLen = 0;
@@ -154,6 +154,7 @@ int main() {
     delete[] arr;
     return 0;
 }
+
 
 
 
