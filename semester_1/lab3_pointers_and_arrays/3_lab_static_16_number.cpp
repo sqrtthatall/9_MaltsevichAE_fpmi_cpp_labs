@@ -52,7 +52,7 @@ int FindMinIndex(float* array, int size)
 }
 
 
-double ComputePositiveProduct(const float array[], int size)
+double ComputePositiveProduct(const float* array, int size)
 {
     long double multy = 1;
     for (int i = 0; i < size; i++) {
@@ -63,7 +63,7 @@ double ComputePositiveProduct(const float array[], int size)
     return multy;
 }
 
-double SumForFirstMinIndex(const float array[], int size, int min)
+double SumForFirstMinIndex(const float* array, int size, int min)
 {
     double sum = 0;
     for (int i = 0; i < min; i++) {
@@ -118,4 +118,5 @@ int main()
 
 
 }
+
 
