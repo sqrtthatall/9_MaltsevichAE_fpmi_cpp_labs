@@ -7,7 +7,7 @@ void FillArrayManual(float* array, int size)
 {
     if (size > max_size) {
         std::cout << "Максимальное кол-во элементов - " << max_size;
-        exit(0);
+        throw " !!!More elems that can keep array!!! ";
     }
     else {
         for (int i = 0; i < size; i++) {
@@ -19,6 +19,7 @@ void FillArrayManual(float* array, int size)
 
 void FillArrayByRandomNumbersFromAToB(float* array, int size, float a, float b)
 {
+    if (a >= b) throw "a must be bigger than b";
     if (size > max_size) {
         std::cout << "Максимальное кол-во элементов - " << max_size << std::endl;
         exit(0);
@@ -79,44 +80,44 @@ int main()
 {
     setlocale(LC_ALL, "Russian");
 
-    int size;
-    std::cout << "Введите количество элементов массива: ";
-    std::cin >> size;
+    try {
+        int size;
+        std::cout << "Введите количество элементов массива: ";
+        std::cin >> size;
 
-    float array[max_size];
-    int choice;
-    std::cout << "Выберите способ заполнения массива:\n1 — вручную\n2 — случайными числами\nВаш выбор: ";
-    std::cin >> choice;
+        float array[max_size];
+        int choice;
+        std::cout << "Выберите способ заполнения массива:\n1 — вручную\n2 — случайными числами\nВаш выбор: ";
+        std::cin >> choice;
 
-    if (choice == 1) {
-        FillArrayManual(array, size);
+        if (choice == 1) {
+            FillArrayManual(array, size);
+        }
+        else if (choice == 2) {
+            float a, b;
+            std::cout << "Введите границы диапазона [a, b]:\na = ";
+            std::cin >> a;
+            std::cout << "b = ";
+            std::cin >> b;
+            FillArrayByRandomNumbersFromAToB(array, size, a, b);
+        }
+        else {
+            std::cout << "Неверный выбор!" << std::endl;
+            return 1;
+        }
+
+        PrintArray(array, size);
+        std::cout << std::endl;
+        int minIndex = FindMinIndex(array, size);
+        long double product = ComputePositiveProduct(array, size);
+        float sumBeforeMin = SumForFirstMinIndex(array, size, minIndex);
+
+        std::cout << "Индекс минимального элемента: " << minIndex << std::endl;
+        std::cout << "Произведение положительных элементов: " << product << std::endl;
+        std::cout << "Сумма элементов до первого минимального: " << sumBeforeMin << std::endl;
     }
-    else if (choice == 2) {
-        float a, b;
-        std::cout << "Введите границы диапазона [a, b]:\na = ";
-        std::cin >> a;
-        std::cout << "b = ";
-        std::cin >> b;
-        FillArrayByRandomNumbersFromAToB(array, size, a, b);
+    catch (const char* msg) {
+        std::cout << msg;
     }
-    else {
-        std::cout << "Неверный выбор!" << std::endl;
-        return 1;
-    }
-
-    PrintArray(array, size);
-    std::cout << std::endl;
-    int minIndex = FindMinIndex(array, size);
-    long double product = ComputePositiveProduct(array, size);
-    float sumBeforeMin = SumForFirstMinIndex(array, size, minIndex);
-
-    std::cout << "Индекс минимального элемента: " << minIndex << std::endl;
-    std::cout << "Произведение положительных элементов: " << product << std::endl;
-    std::cout << "Сумма элементов до первого минимального: " << sumBeforeMin << std::endl;
-
     return 0;
-
-
 }
-
-
