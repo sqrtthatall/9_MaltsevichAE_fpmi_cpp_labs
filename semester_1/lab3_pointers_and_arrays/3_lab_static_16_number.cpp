@@ -113,11 +113,15 @@ int main()
         float sumBeforeMin = SumForFirstMinIndex(array, size, minIndex);
 
         std::cout << "Индекс минимального элемента: " << minIndex << std::endl;
+        std::cout << "----------------------------------" << minIndex << std::endl;
         std::cout << "Произведение положительных элементов: " << product << std::endl;
+        std::cout << "----------------------------------" << minIndex << std::endl;
         std::cout << "Сумма элементов до первого минимального: " << sumBeforeMin << std::endl;
+        std::cout << "----------------------------------" << minIndex << std::endl;
     }
     catch (const char* msg) {
         std::cout << msg;
     }
     return 0;
 }
+
