@@ -12,24 +12,24 @@ int main()
 {
     const std::string input_file = "input.txt";
     std::ifstream fin(input_file);
-    
+
     if (!IsEmptyFile) {
-        std::cout << "File is empty!";
-        exit(405);
+        std::cerr << "\033[31mError:File is empty!\033[0m\n";
+        return 1;
     }
 
     if (!fin.is_open()) {
-        std::cout << "Error: Could not open the file.";
-        exit(404);
+        std::cerr << "\033[31mError:Could not open the file: \033[0m" << "'" << input_file <<  "'" << "\033[31m \nCreate file or check the file name!\n\033[0m\n";
+        return 2;
     }
 
     std::string NeedToCount;
     std::string line;
 
     std::getline(fin, NeedToCount);
-    
+
     int counter = 0;
-   
+
     while (std::getline(fin, line)) {
         std::istringstream iss(line);
         std::string word;
@@ -42,6 +42,4 @@ int main()
 
     std::cout << counter << std::endl;
     return 0;
-
-
 }
