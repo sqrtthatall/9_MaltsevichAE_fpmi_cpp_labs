@@ -2,8 +2,6 @@
 #include <string>
 #include <vector>
 #include <sstream>
-
-
 int CounterUppers(const std::string& word);
 char SwapCase(char c);
 std::string InvertCase(std::string& s);
@@ -30,21 +28,6 @@ int main()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 int CounterUppers(const std::string& word)
 {
     int count = 0;
@@ -56,6 +39,7 @@ int CounterUppers(const std::string& word)
     return count;
 }
 
+
 char SwapCase(char c)
 {
     if (std::islower(static_cast<unsigned char>(c))) {
@@ -64,6 +48,7 @@ char SwapCase(char c)
     else if (std::isupper(static_cast<unsigned char>(c))) {
         return (std::tolower(static_cast<unsigned char>(c)));
     }
+    return c;
 }
 
 
@@ -79,22 +64,23 @@ std::string InvertCase(std::string& s)
 
 void SortWords(std::vector<std::string>& words)
 {
-    for (int i = 0; i < words.size() - 1; ++i) {
-        for (int j = 0; j < words.size() - 1 - i; ++j) {
-            int up1st = CounterUppers(words[i]);
+    int n = static_cast<int>(words.size());
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = 0; j < n - 1 - i; ++j) {
+            int up1st = CounterUppers(words[j]);
             int up2nd = CounterUppers(words[j + 1]);
 
-            bool swap = false;
-            if (up1st > up2nd) {
-                swap = true;
+            bool needSwap = false;
+            if (up1st < up2nd) {
+                needSwap = true;
             }
-            else if (up1st == up2nd && words[i] > words[j + 1]) {
-                swap = true;
+            else if (up1st == up2nd && words[j] < words[j + 1]) {
+                needSwap = true;
             }
 
-            if (swap) {
-                std::string temp;
-                words[i] = words[j + 1];
+            if (needSwap) {
+                std::string temp = words[j];
+                words[j] = words[j + 1];
                 words[j + 1] = temp;
             }
         }
