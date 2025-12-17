@@ -10,6 +10,9 @@ bool IsEmptyFile(std::ifstream& file)
 
 int main()
 {
+    std::locale::global(std::locale("ru_RU.UTF-8"));
+    std::wcin.imbue(std::locale());
+    std::wcout.imbue(std::locale());
     const std::string input_file = "input.txt";
     std::ifstream fin(input_file);
 
@@ -19,7 +22,7 @@ int main()
     }
 
     if (!fin.is_open()) {
-        std::cerr << "\033[31mError:Could not open the file: \033[0m" << "'" << input_file <<  "'" << "\033[31m \nCreate file or check the file name!\n\033[0m\n";
+        std::cerr << "\033[31mError:Could not open the file: \033[0m" << "'" << input_file << "'" << "\033[31m \nCreate file or check the file name!\n\033[0m\n";
         return 2;
     }
 
@@ -42,4 +45,6 @@ int main()
 
     std::cout << counter << std::endl;
     return 0;
+    fin.close();
+    
 }
