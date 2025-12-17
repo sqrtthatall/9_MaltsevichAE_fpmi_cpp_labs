@@ -10,9 +10,7 @@ bool IsEmptyFile(std::ifstream& file)
 
 int main()
 {
-    std::locale::global(std::locale("ru_RU.UTF-8"));
-    std::wcin.imbue(std::locale());
-    std::wcout.imbue(std::locale());
+   
     const std::string input_file = "input.txt";
     std::ifstream fin(input_file);
 
@@ -48,3 +46,4 @@ int main()
     fin.close();
     
 }
+
