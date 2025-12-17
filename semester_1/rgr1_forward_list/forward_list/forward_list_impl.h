@@ -34,9 +34,9 @@ public:
         }
 
         ForwardListIterator operator++(int) {  // postfix
-            ForwardListIterator retval = *this;
+            ForwardListIterator value = *this;
             ++(*this);
-            return retval;
+            return value;
         }
 
         bool operator==(const ForwardListIterator& other) const {
