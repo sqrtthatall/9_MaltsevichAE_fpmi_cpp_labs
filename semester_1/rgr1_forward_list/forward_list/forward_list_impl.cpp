@@ -1,4 +1,4 @@
-#include "forward_list_impl.h"
+#include "Header1.h"
 #include <initializer_list>
 #include <stdexcept>
 
@@ -7,7 +7,7 @@ ForwardList::ForwardList() : head_(nullptr), size_(0) {
 
 ForwardList::ForwardList(const ForwardList& rhs) : head_(nullptr), size_(rhs.size_) {
     if (rhs.head_ == nullptr) {
-        return 2; // ДОДЕЛАТЬ ИСКЛЮЧЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        throw std::exception("Error: Empty list\n!"); // ДОДЕЛАТЬ ИСКЛЮЧЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
     head_ = new Node(rhs.head_->value_);
@@ -23,7 +23,7 @@ ForwardList::ForwardList(const ForwardList& rhs) : head_(nullptr), size_(rhs.siz
 
 ForwardList::ForwardList(size_t count, int32_t value) : head_(nullptr), size_(count) {
     if (count == 0) {
-        return 2; // ДОДЕЛАТЬ ИСКЛЮЧЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        throw std::exception(); // ДОДЕЛАТЬ ИСКЛЮЧЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
     head_ = new Node(value);
@@ -37,7 +37,7 @@ ForwardList::ForwardList(size_t count, int32_t value) : head_(nullptr), size_(co
 
 ForwardList::ForwardList(std::initializer_list<int32_t> init) : head_(nullptr), size_(init.size()) {
     if (init.size() == 0) {
-        return 2; // ДОДЕЛАТЬ ИСКЛЮЧЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        throw std::exception("Error: Empty initializer_list!\n"); // ДОДЕЛАТЬ ИСКЛЮЧЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
     auto it = init.begin();
@@ -91,7 +91,7 @@ void ForwardList::PushFront(int32_t value) {
 
 void ForwardList::PopFront() {
     if (head_ == nullptr) {
-        return 2; // ДОДЕЛАТЬ ИСКЛЮЧЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        throw std::exception("Error: can't do PopFront!\n"); // ДОДЕЛАТЬ ИСКЛЮЧЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
     Node* tmp = head_;
@@ -110,7 +110,7 @@ void ForwardList::Remove(int32_t value) {
     }
 
     if (head_ == nullptr) {
-        return; // ДОДЕЛАТЬ ИСКЛЮЧЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        throw std::exception("Error: already empty!\n"); // ДОДЕЛАТЬ ИСКЛЮЧЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
     Node* current = head_;
@@ -120,7 +120,8 @@ void ForwardList::Remove(int32_t value) {
             current->next_ = to_delete->next_;
             delete to_delete;
             --size_;
-        } else {
+        }
+        else {
             current = current->next_;
         }
     }
