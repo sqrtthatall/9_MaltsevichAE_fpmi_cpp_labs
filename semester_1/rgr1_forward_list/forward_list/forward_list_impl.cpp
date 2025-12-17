@@ -7,7 +7,7 @@ ForwardList::ForwardList() : head_(nullptr), size_(0) {
 
 ForwardList::ForwardList(const ForwardList& rhs) : head_(nullptr), size_(rhs.size_) {
     if (rhs.head_ == nullptr) {
-        throw std::exception("Error: Empty list\n!"); // ДОДЕЛАТЬ ИСКЛЮЧЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        throw std::exception("Error: Empty list\n!"); 
     }
 
     head_ = new Node(rhs.head_->value_);
@@ -23,7 +23,7 @@ ForwardList::ForwardList(const ForwardList& rhs) : head_(nullptr), size_(rhs.siz
 
 ForwardList::ForwardList(size_t count, int32_t value) : head_(nullptr), size_(count) {
     if (count == 0) {
-        throw std::exception(); // ДОДЕЛАТЬ ИСКЛЮЧЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        throw std::exception();
     }
 
     head_ = new Node(value);
@@ -37,7 +37,7 @@ ForwardList::ForwardList(size_t count, int32_t value) : head_(nullptr), size_(co
 
 ForwardList::ForwardList(std::initializer_list<int32_t> init) : head_(nullptr), size_(init.size()) {
     if (init.size() == 0) {
-        throw std::exception("Error: Empty initializer_list!\n"); // ДОДЕЛАТЬ ИСКЛЮЧЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        throw std::exception("Error: Empty initializer_list!\n");
     }
 
     auto it = init.begin();
@@ -91,7 +91,7 @@ void ForwardList::PushFront(int32_t value) {
 
 void ForwardList::PopFront() {
     if (head_ == nullptr) {
-        throw std::exception("Error: can't do PopFront!\n"); // ДОДЕЛАТЬ ИСКЛЮЧЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        throw std::exception("Error: can't do PopFront!\n");
     }
 
     Node* tmp = head_;
@@ -110,7 +110,7 @@ void ForwardList::Remove(int32_t value) {
     }
 
     if (head_ == nullptr) {
-        throw std::exception("Error: already empty!\n"); // ДОДЕЛАТЬ ИСКЛЮЧЕНИЯ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        throw std::exception("Error: already empty!\n");
     }
 
     Node* current = head_;
