@@ -49,7 +49,7 @@ size_t QuantityOfPredicatGiven(const std::vector<int>& vec) {
 
 void RellocateNuls(std::vector<int>& vec) {
     if (vec.empty()) {
-        throw std::invalid_argument("Can't relocate nuls, your vector is empty!");
+        throw "Can't relocate nuls, your vector is empty!";
     }
     int sum = std::accumulate(vec.begin(), vec.end(), 0);
     int medium_result = sum / static_cast<int>(vec.size());
