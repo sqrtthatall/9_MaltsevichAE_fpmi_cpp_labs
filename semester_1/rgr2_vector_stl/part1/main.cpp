@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <numeric>
+#include <algorithm>
 
 int MyAbs(int x) {
     if (x < 0) return -x;
@@ -32,62 +34,43 @@ void PrintVector(const std::vector<int>& vec) {
 }
 
 int SumOfNumbers(const std::vector<int>& vec) {
-    int sum = 0;
-    for (int x : vec) {
-        sum += x;
-    }
-    return sum;
+    return std::accumulate(vec.begin(), vec.end(), 0);
 }
 
 
 
 size_t QuantityOfNumGiven(const std::vector<int>& vec, int num_given) {
-    size_t result = 0;
-    for (int x : vec) {
-        if (x == num_given) {
-            result++;
-        }
-    }
-    return result;
+    return static_cast<size_t>(std::count(vec.begin(), vec.end(), num_given));
 }
+
 size_t QuantityOfPredicatGiven(const std::vector<int>& vec) {
-    size_t result = 0;
-    for (int x : vec) {
-        if (x >= 5)  
-        {
-            result++;
-        }
-    }
-    return result;
+    return static_cast<size_t>(std::count_if(vec.begin(), vec.end(), [](int x) {return x >= 5; }));
 }
 
 void RellocateNuls(std::vector<int>& vec) {
-    if (vec.empty()) throw "Can't relocate nuls, your vector is empty!";
-    int medium_result = SumOfNumbers(vec) / vec.size();
-    for (size_t i = 0; i < vec.size(); i++) {
-        if (vec[i] == 0) {
-            vec[i] = medium_result;
-        }
+    if (vec.empty()) {
+        throw std::invalid_argument("Can't relocate nuls, your vector is empty!");
     }
+    int sum = std::accumulate(vec.begin(), vec.end(), 0);
+    int medium_result = sum / static_cast<int>(vec.size());
+    std::replace(vec.begin(), vec.end(), 0, medium_result);
 }
 
 void RellocateEvenNums(std::vector<int>& vec) {
-    if (vec.empty()) throw "Can't relocate even nums, your vector is empty!";
+    if (vec.empty()) throw "Can;t Relocate even nums, vector is empty!";
 
-    int difference = 0;
-    int maxima = vec[0];
-    int minima = vec[0];
+    std::vector<int>::const_iterator min_it = std::min_element(vec.begin(), vec.end());
+    std::vector<int>::const_iterator max_it = std::max_element(vec.begin(), vec.end());
 
-    for (size_t i = 1; i < vec.size(); ++i) {
-        if (vec[i] > maxima) maxima = vec[i];
-        if (vec[i] < minima) minima = vec[i];
-    }
-    difference = maxima - minima;
-    for (size_t k = 0; k < vec.size(); k++) {
-        if (MyAbs(vec[k]) % 2 == 0) {
-            vec[k] = difference;
-        }
-    }
+
+    int difference = *max_it - *min_it;
+
+    std::replace_if(vec.begin(), vec.end(),
+        [](int x) -> bool {
+            return std::abs(x) % 2 == 0;
+        },
+        difference
+    );
 }
 
 void RemoveEqualByModul(std::vector<int>& vec) {
@@ -144,6 +127,8 @@ int main()
     }
     return 0;
 }
+
+
 
 
 
